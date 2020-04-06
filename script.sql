@@ -1,4 +1,5 @@
 CREATE DATABASE `mercadoservicos` /*!40100 DEFAULT CHARACTER SET latin1 */;
+use mercadoservicos;
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

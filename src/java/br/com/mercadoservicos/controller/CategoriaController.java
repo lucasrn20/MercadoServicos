@@ -2,6 +2,7 @@ package br.com.mercadoservicos.controller;
 
 import br.com.mercadoservicos.domain.Categoria;
 import br.com.mercadoservicos.service.CategoriaService;
+import br.com.mercadoservicos.util.UtilMensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -38,21 +39,33 @@ public class CategoriaController implements Serializable{
     }
     
     public String salvar(){
-        categoriaService.inserir(categoria);
-        this.listar();
-        return "list.xhtml?faces-redirect=true";
+        if(categoriaService.inserir(categoria)){
+            UtilMensagens.mensagemSucesso("Sucesso", "Categoria salva com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true"; 
+        }
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao salvar a categoria!");
+        return null;
     }
     
     public String alterar(){
-        categoriaService.alterar(categoria);
-        this.listar();
-        return "list.xhtml?faces-redirect=true";
+        if(categoriaService.alterar(categoria)){
+            UtilMensagens.mensagemSucesso("Sucesso", "Categoria alterada com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true"; 
+        }
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao alterar a categoria!");
+        return null;
     }
     
     public String excluir(Categoria categoria){
-        categoriaService.excluir(categoria);
-        this.listar();
-        return "list.xhtml?faces-redirect=true";
+        if(categoriaService.excluir(categoria)){
+            UtilMensagens.mensagemSucesso("Sucesso", "Categoria excluida com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true"; 
+        }
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao excluir a categoria!");
+        return null;
     }
 
     public List<Categoria> getCategorias() {

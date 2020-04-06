@@ -6,7 +6,7 @@
     <ui:composition template="/private/template/template.xhtml">
         <ui:define name="conteudo">
             <p:panel id="panel" header="Categorias" style="margin: 20px;">
-                <p:dataTable value="#{categoriaMB.categorias}" var="categoria"
+                <p:dataTable id="datatable" value="#{categoriaMB.categorias}" var="categoria"
                              emptyMessage="Nenhum registro encontrado" style="margin: 10px;"
                              paginator="true" paginatorPosition="bottom" rows="10">
                     <p:column headerText="Descrição" sortBy="#{categoria.descricao}">
@@ -16,8 +16,8 @@
                         <p:commandButton action="#{categoriaMB.buscaDados(categoria)}" icon="ui-icon-pencil" title="Editar"/>
                     </p:column>
                     <p:column headerText="Excluir" width="80" style="text-align: center;">
-                        <p:commandButton action="#{categoriaMB.excluir(categoria)}" icon="ui-icon-trash" title="Excluir"
-                                       onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+                        <p:commandButton id="excluir" action="#{categoriaMB.excluir(categoria)}" icon="ui-icon-trash" title="Excluir"
+                                         onclick="if (!confirm('Confirma a exclusão?')) return false" update=":form:growl"/>
                     </p:column>
                 </p:dataTable>
                 <div align="center">
