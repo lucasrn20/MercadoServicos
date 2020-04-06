@@ -40,31 +40,31 @@ public class UsuarioController implements Serializable{
     
     public String salvar(){
         if(usuarioService.inserir(usuario)){
-            UtilMensagens.mensagemSucesso("Sucesso", "Usuario salvo com sucesso!");
+            UtilMensagens.mensagemSucesso("Sucesso", "Usuário salvo com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true"; 
         }
-        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao salvar a usuario!");
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao salvar a usuário!");
         return null;
     }
     
     public String alterar(){
         if(usuarioService.alterar(usuario)){
-            UtilMensagens.mensagemSucesso("Sucesso", "Usuario alterado com sucesso!");
+            UtilMensagens.mensagemSucesso("Sucesso", "Usuário alterado com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true"; 
         }
-        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao alterar o usuario!");
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao alterar o usuário!");
         return null;
     }
     
     public String excluir(Usuario usuario){
         if(usuarioService.excluir(usuario)){
-            UtilMensagens.mensagemSucesso("Sucesso", "Usuario excluido com sucesso!");
+            UtilMensagens.mensagemSucesso("Sucesso", "Usuário excluido com sucesso!");
             this.listar();
             return "list.xhtml?faces-redirect=true"; 
         }
-        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao excluir o usuario!");
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao excluir o usuário!");
         return null;
     }
 
