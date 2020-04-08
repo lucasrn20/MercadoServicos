@@ -2,6 +2,7 @@ package br.com.mercadoservicos.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,12 +46,12 @@ public class Usuario implements Serializable{
     private String cnpj;
     
     @Column(name="dtNasc")
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, String email, String senha, String tipo, String cpf, String cnpj, LocalDate dataNascimento) {
+    public Usuario(Integer id, String nome, String email, String senha, String tipo, String cpf, String cnpj, Date dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -117,11 +118,11 @@ public class Usuario implements Serializable{
         this.cnpj = cnpj;
     }
 
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

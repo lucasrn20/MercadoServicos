@@ -5,11 +5,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/private/template/template.xhtml">
         <ui:define name="conteudo">
-            <p:panel id="panel" header="Usuarios" style="margin: 20px;">
+            <p:panel id="panel" header="Usuários" style="margin: 20px;">
                 <div class="ui-g">
                     <div class="ui-g-12">
                         <label>Descrição</label><br/>
-                        <p:inputText id="descricao" value="#{usuarioMB.categoria.descricao}" style="width: 98%;"
+                        <p:inputText id="descricao" value="#{usuarioMB.usuario.nome}" style="width: 98%;"
                                      required="true" requiredMessage="Descrição é obrigatória!"/>
                     </div>
                 </div>
