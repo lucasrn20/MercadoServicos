@@ -29,21 +29,25 @@
                         <label>Tipo Pessoa</label><br/>
                         <p:selectOneRadio id="tipo" value="#{usuarioMB.usuario.tipo}" style="width: 98%;"
                                          required="true" requiredMessage="Nome é obrigatório!">
+                            <p:ajax event="change" listener="#{usuarioMB.inverteTipo()}" update="cpf, cnpj, dataNascimento"/>
                             <f:selectItem itemLabel="Física" itemValue="F"/>
                             <f:selectItem itemLabel="Jurídica" itemValue="J"/>
                         </p:selectOneRadio>
                     </div>
                     <div class="ui-g-2">
                         <label>CPF</label><br/>
-                        <p:inputMask id="cpf" value="#{usuarioMB.usuario.cpf}" style="width: 98%" mask="999.999.999-99"/>
+                        <p:inputMask id="cpf" value="#{usuarioMB.usuario.cpf}" style="width: 98%" mask="999.999.999-99"
+                                     disabled="#{usuarioMB.desabilitaPF}"/>
                     </div>
                     <div class="ui-g-2">
                         <label>CNPJ</label><br/>
-                        <p:inputMask id="cnpj" value="#{usuarioMB.usuario.cnpj}" style="width: 98%" mask="99.999.999/9999-99"/>
+                        <p:inputMask id="cnpj" value="#{usuarioMB.usuario.cnpj}" style="width: 98%" mask="99.999.999/9999-99"
+                                     disabled="#{!usuarioMB.desabilitaPF}" />
                     </div>
                     <div class="ui-g-3">
                         <label>Data Nascimento</label><br/>
-                        <p:calendar id="dataNascimento" value="#{usuarioMB.usuario.dataNascimento}" style="width: 98%" locale="pt" pattern="dd/MM/yyyy"/>
+                        <p:calendar id="dataNascimento" value="#{usuarioMB.usuario.dataNascimento}" style="width: 98%" locale="pt" pattern="dd/MM/yyyy"
+                                    disabled="#{usuarioMB.desabilitaPF}"/>
                     </div>
                 </div>
                 <br/>

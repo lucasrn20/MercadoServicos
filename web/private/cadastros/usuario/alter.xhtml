@@ -2,15 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/private/template/template.xhtml">
         <ui:define name="conteudo">
             <p:panel id="panel" header="Usuários" style="margin: 20px;">
                 <div class="ui-g">
-                    <div class="ui-g-12">
-                        <label>Descrição</label><br/>
-                        <p:inputText id="descricao" value="#{usuarioMB.usuario.nome}" style="width: 98%;"
-                                     required="true" requiredMessage="Descrição é obrigatória!"/>
+                    <div class="ui-g-5">
+                        <label>Nome</label><br/>
+                        <p:inputText id="nome" value="#{usuarioMB.usuario.nome}" style="width: 98%;"
+                                     required="true" requiredMessage="Nome é obrigatório!"/>
+                    </div>
+                    <div class="ui-g-5">
+                        <label>E-mail</label><br/>
+                        <p:inputText id="email" value="#{usuarioMB.usuario.email}" style="width: 98%;"
+                                     required="true" requiredMessage="E-mail é obrigatório!"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Senha</label><br/>
+                        <p:password id="senha" value="#{usuarioMB.usuario.senha}" style="width: 98%;"
+                                     required="true" requiredMessage="Senha é obrigatória!"/>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-3">
+                        <label>Tipo Pessoa</label><br/>
+                        <p:selectOneRadio id="tipo" value="#{usuarioMB.usuario.tipo}" style="width: 98%;"
+                                         required="true" requiredMessage="Nome é obrigatório!">
+                            <p:ajax event="change" listener="#{usuarioMB.inverteTipo()}" update="cpf, cnpj, dataNascimento"/>
+                            <f:selectItem itemLabel="Física" itemValue="F"/>
+                            <f:selectItem itemLabel="Jurídica" itemValue="J"/>
+                        </p:selectOneRadio>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>CPF</label><br/>
+                        <p:inputMask id="cpf" value="#{usuarioMB.usuario.cpf}" style="width: 98%" mask="999.999.999-99"
+                                     disabled="#{usuarioMB.desabilitaPF}"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>CNPJ</label><br/>
+                        <p:inputMask id="cnpj" value="#{usuarioMB.usuario.cnpj}" style="width: 98%" mask="99.999.999/9999-99"
+                                     disabled="#{!usuarioMB.desabilitaPF}" />
+                    </div>
+                    <div class="ui-g-3">
+                        <label>Data Nascimento</label><br/>
+                        <p:calendar id="dataNascimento" value="#{usuarioMB.usuario.dataNascimento}" style="width: 98%" locale="pt" pattern="dd/MM/yyyy"
+                                    disabled="#{usuarioMB.desabilitaPF}"/>
                     </div>
                 </div>
                 <br/>
