@@ -85,6 +85,10 @@ public class UsuarioController implements Serializable{
         UtilMensagens.mensagemErro("Dados inválidos!", "Usuário ou senha incorretos!");
         return null;
     }
+    
+    public void inicializarHibernate(){
+        usuarioService.inicializarHibernate();
+    }
 
     public List<Usuario> getUsuarios() {
         return usuarios;

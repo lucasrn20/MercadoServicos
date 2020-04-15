@@ -7,11 +7,45 @@ import org.hibernate.Session;
 
 public class UsuarioDao {
     
+    public void inicializarHibernate(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.getTransaction().commit();
+    }
+    
     public List<Usuario> listar(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         try{
             List<Usuario> usuarios = session.createQuery("from Usuario order by nome").list();
+            session.getTransaction().commit();
+            return usuarios;
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+    
+    public List<Usuario> listarClientes(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        try{
+            List<Usuario> usuarios = session.createQuery("from Usuario where tipo = 'F' order by nome").list();
+            session.getTransaction().commit();
+            return usuarios;
+        }catch(Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+    
+    public List<Usuario> listarEmpresas(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        try{
+            List<Usuario> usuarios = session.createQuery("from Usuario where tipo = 'J' order by nome").list();
             session.getTransaction().commit();
             return usuarios;
         }catch(Exception e){

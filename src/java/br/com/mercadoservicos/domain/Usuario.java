@@ -1,14 +1,15 @@
 package br.com.mercadoservicos.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,6 +48,9 @@ public class Usuario implements Serializable{
     
     @Column(name="dtNasc")
     private Date dataNascimento;
+    
+    @OneToMany(mappedBy = "id")
+    private List<OrdemServico> ordemServico;
 
     public Usuario() {
     }
@@ -154,6 +158,14 @@ public class Usuario implements Serializable{
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", tipo=" + tipo + ", cpf=" + cpf + ", cnpj=" + cnpj + ", dataNascimento=" + dataNascimento + '}';
+    }
+
+    public List<OrdemServico> getOrdemServico() {
+        return ordemServico;
+    }
+
+    public void setOrdemServico(List<OrdemServico> ordemServico) {
+        this.ordemServico = ordemServico;
     }
     
     
