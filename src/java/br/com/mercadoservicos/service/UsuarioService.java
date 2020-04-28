@@ -18,6 +18,14 @@ public class UsuarioService {
         return usuarioDao.listar();
     }
     
+    public List<Usuario> listarClientes(){
+        return usuarioDao.listarClientes();
+    }
+    
+    public List<Usuario> listarEmpresas(){
+        return usuarioDao.listarEmpresas();
+    }
+    
     public Usuario consultar(Integer id){
         return usuarioDao.consultar(id);
     }

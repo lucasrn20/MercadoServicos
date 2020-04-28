@@ -40,6 +40,14 @@ public class OrdemServico implements Serializable{
     public OrdemServico() {
     }
 
+    public OrdemServico(Integer id, Date dataHora, String observacao, Usuario cliente, Usuario empresa) {
+        this.id = id;
+        this.dataHora = dataHora;
+        this.observacao = observacao;
+        this.cliente = cliente;
+        this.empresa = empresa;
+    }
+
     public Integer getId() {
         return id;
     }
