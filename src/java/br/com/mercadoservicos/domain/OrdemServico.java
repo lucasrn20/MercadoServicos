@@ -2,7 +2,9 @@ package br.com.mercadoservicos.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +39,9 @@ public class OrdemServico implements Serializable{
     @JoinColumn(name = "idEmpresa",referencedColumnName = "id")
     private Usuario empresa;
 
+    @OneToMany(mappedBy = "itensOrdemServicoPk.id", cascade = CascadeType.ALL)
+    private List<ItensOrdemServico> itensOs;
+    
     public OrdemServico() {
     }
 
@@ -87,6 +92,16 @@ public class OrdemServico implements Serializable{
     public void setEmpresa(Usuario empresa) {
         this.empresa = empresa;
     }
+
+    public List<ItensOrdemServico> getItensOs() {
+        return itensOs;
+    }
+
+    public void setItensOs(List<ItensOrdemServico> itensOs) {
+        this.itensOs = itensOs;
+    }
+    
+    
 
     @Override
     public int hashCode() {
