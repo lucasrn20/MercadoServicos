@@ -34,7 +34,7 @@ public class Servico implements Serializable{
     @JoinColumn(name="idCategoria", referencedColumnName="id")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "servico")
     private List<ItensOrdemServico> itensOs;
     
     public Servico(){

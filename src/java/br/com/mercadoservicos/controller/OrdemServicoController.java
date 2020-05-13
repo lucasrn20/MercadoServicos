@@ -1,11 +1,13 @@
 package br.com.mercadoservicos.controller;
 
+import br.com.mercadoservicos.domain.ItensOrdemServico;
 import br.com.mercadoservicos.domain.OrdemServico;
 import br.com.mercadoservicos.domain.Usuario;
 import br.com.mercadoservicos.service.OrdemServicoService;
 import br.com.mercadoservicos.service.UsuarioService;
 import br.com.mercadoservicos.util.UtilMensagens;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -20,6 +22,8 @@ public class OrdemServicoController implements Serializable{
     private UsuarioService usuarioService = new UsuarioService();
     private List<Usuario> clientes;
     private List<Usuario> empresas;
+    private List<ItensOrdemServico> itensOrdemServico;
+    private ItensOrdemServico itemOrdemServico;
     
     public OrdemServicoController(){
         listar();
@@ -31,6 +35,8 @@ public class OrdemServicoController implements Serializable{
     
     public String novo(){
         ordemServico = new OrdemServico();
+        itensOrdemServico = new ArrayList<>();
+        itemOrdemServico = new ItensOrdemServico();
         clientes = usuarioService.listarClientes();
         empresas = usuarioService.listarEmpresas();
         return "new.xhtml?faces-redirect=true";
@@ -46,6 +52,7 @@ public class OrdemServicoController implements Serializable{
     }
     
     public String salvar(){
+        ordemServico.setItensOs(itensOrdemServico);
         if(ordemServicoService.inserir(ordemServico)){
             UtilMensagens.mensagemSucesso("Sucesso", "Ordem de serviço salva com sucesso!");
             this.listar();
@@ -63,6 +70,15 @@ public class OrdemServicoController implements Serializable{
         }
         UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao excluir a ordem de serviço!");
         return null;
+    }
+    
+    public void addServico(){
+        itensOrdemServico.add(itemOrdemServico);
+        itemOrdemServico = new ItensOrdemServico();
+    }
+    
+    public void removeServico(ItensOrdemServico itemOrdemServico ){
+        itensOrdemServico.remove(itemOrdemServico);
     }
 
     public List<OrdemServico> getCategorias() {
@@ -111,6 +127,22 @@ public class OrdemServicoController implements Serializable{
 
     public void setOrdensServico(List<OrdemServico> ordensServico) {
         this.ordensServico = ordensServico;
+    }
+
+    public List<ItensOrdemServico> getItensOrdemServico() {
+        return itensOrdemServico;
+    }
+
+    public void setItensOrdemServico(List<ItensOrdemServico> itensOrdemServico) {
+        this.itensOrdemServico = itensOrdemServico;
+    }
+
+    public ItensOrdemServico getItemOrdemServico() {
+        return itemOrdemServico;
+    }
+
+    public void setItemOrdemServico(ItensOrdemServico itemOrdemServico) {
+        this.itemOrdemServico = itemOrdemServico;
     }
     
     

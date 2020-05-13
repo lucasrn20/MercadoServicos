@@ -31,7 +31,29 @@
                         <p:inputTextarea id="observacao" value="#{ordemServicoMB.ordemServico.observacao}" style="width: 98%" rows="3"/>
                     </div> 
                 </div>
-                    
+                <br/>
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <label>Serviços</label>
+                        <p:selectOneMenu id="servico" value="#{ordemServicoMB.itemOrdemServico.servico}" style="width: 98%" 
+                                         converter="entityConverter">
+                            <f:selectItem itemLabel="-- Selecione um serviço --" noSelectionOption="true"/>
+                            <f:selectItems value="#{servicoMB.servicos}" var="servico"
+                                           itemLabel="#{servico.descricao}" itemValue="#{servico}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Quantidade</label>
+                        <p:inputText id="quantidade" value="#{ordemServicoMB.itemOrdemServico.quantidade}" style="width:  98%"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Preço</label>
+                        <p:inputText id="preco" value="#{ordemServicoMB.itemOrdemServico.preco}" style="width:  98%"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <p:commandButton id="add" action="#{ordemServicoMB.addServico()}" value="Adicionar" icon="ui-icon-plus"/> 
+                    </div>
+                </div>
                 <br/>
                 <div align="center">
                     <p:commandButton action="#{ordemServicoMB.salvar()}" value="Salvar" update="growl" style="margin-right: 10px;"/>
