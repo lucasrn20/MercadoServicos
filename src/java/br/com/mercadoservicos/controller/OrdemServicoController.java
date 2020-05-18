@@ -81,6 +81,10 @@ public class OrdemServicoController implements Serializable{
         itensOrdemServico.remove(itemOrdemServico);
     }
 
+    public void calculaTotal(){
+        itemOrdemServico.setPreco(itemOrdemServico.getQuantidade() * itemOrdemServico.getServico().getPreco());
+    }
+    
     public List<OrdemServico> getCategorias() {
         return ordensServico;
     }
