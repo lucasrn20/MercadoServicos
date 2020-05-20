@@ -11,7 +11,7 @@
                 <div class="ui-g">
                     <div class="ui-g-6">
                         <label>Cliente</label><br/>
-                        <p:selectOneMenu id="cliente" value="#{ordemServicoMB.ordemServico.cliente}" style="width: 98%"
+                        <p:selectOneMenu id="cliente" value="#{ordemServicoMB.ordemServico.cliente}" style="width: 93%"
                                          converter="entityConverter">
                             <f:selectItems value="#{ordemServicoMB.clientes}" var="cliente"
                                            itemLabel="#{cliente.nome}" itemValue="#{cliente}"/>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="ui-g-6">
                         <label>Empresa</label><br/>
-                        <p:selectOneMenu id="empresa" value="#{ordemServicoMB.ordemServico.empresa}" style="width: 98%"
+                        <p:selectOneMenu id="empresa" value="#{ordemServicoMB.ordemServico.empresa}" style="width: 93%"
                                          converter="entityConverter">
                             <f:selectItems value="#{ordemServicoMB.empresas}" var="empresa"
                                            itemLabel="#{empresa.nome}" itemValue="#{empresa}"/>
@@ -30,31 +30,39 @@
                     <div class="ui-g-12">
                         <label>Observações</label><br/>
                         <p:inputTextarea id="observacao" value="#{ordemServicoMB.ordemServico.observacao}" style="width: 98%" rows="3"/>
-                    </div> 
+                    </div>
                 </div>
                 <br/>
                 <div class="ui-g">
                     <div class="ui-g-6">
-                        <label>Serviços</label>
-                        <p:selectOneMenu id="servico" value="#{ordemServicoMB.itemOrdemServico.servico}" style="width: 98%" 
-                                         converter="entityConverter" requiredMessage="Serviço não pode ser nulo">
-                            <f:selectItem itemLabel="-- Selecione um serviço --" noSelectionOption="true" />
+                        <label>Serviços</label><br/>
+                        <p:selectOneMenu id="servico" value="#{ordemServicoMB.itemOrdemServico.servico}" style="width: 95%"
+                                         converter="entityConverter" required="true" requiredMessage="Serviço é obrigatório">
+                            <f:selectItem itemLabel="-- Selecione um serviço --" noSelectionOption="true"/>
                             <f:selectItems value="#{servicoMB.servicos}" var="servico"
                                            itemLabel="#{servico.descricao}" itemValue="#{servico}"/>
+                            <p:ajax event="change"/>
                         </p:selectOneMenu>
                     </div>
                     <div class="ui-g-2">
-                        <label>Quantidade</label>
-                        <p:inputText id="quantidade" value="#{ordemServicoMB.itemOrdemServico.quantidade}" style="width:  98%" requiredMessage="Quantidade não pode ser nulo">
+                        <label>Quantidade</label><br/>
+                        <p:inputText id="quantidade" value="#{ordemServicoMB.itemOrdemServico.quantidade}" style="width: 95%"
+                                     required="true" requiredMessage="Quantidade é obrigatória">
                             <p:ajax event="blur" listener="#{ordemServicoMB.calculaTotal()}" update="preco"/>
+                            <f:convertNumber minFractionDigits="2"/>
                         </p:inputText>
                     </div>
                     <div class="ui-g-2">
-                        <label>Preço</label>
-                        <p:inputText id="preco" value="#{ordemServicoMB.itemOrdemServico.preco}" style="width:  98%" disabled="true"/>
+                        <label>Preço</label><br/>
+                        <p:inputText id="preco" value="#{ordemServicoMB.itemOrdemServico.preco}" style="width: 95%"
+                                     readonly="true">
+                            <f:convertNumber minFractionDigits="2"/>
+                        </p:inputText>
                     </div>
                     <div class="ui-g-2">
-                        <p:commandButton id="add" action="#{ordemServicoMB.addServico()}" value="Adicionar" icon="ui-icon-plus" update="itensOrdemServico, servico, quantidade, preco"/> 
+                        <br/>
+                        <p:commandButton id="add" action="#{ordemServicoMB.addServico()}" value="Adicionar" 
+                                         icon="ui-icon-plus" update="itensOrdemServico, servico, quantidade, preco, growl"/>
                     </div>
                 </div>
                 <div class="ui-g">
@@ -64,25 +72,26 @@
                             <p:column headerText="Serviço" sortBy="#{item.servico.descricao}">
                                 #{item.servico.descricao}
                             </p:column>
-                            <p:column headerText="Quantidade" width="200" style="text-align: center">
+                            <p:column headerText="Quantidade" width="200" style="text-align: center;">
                                 <h:outputText value="#{item.quantidade}">
                                     <f:convertNumber minFractionDigits="2"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Preço" width="200" style="text-align: center">
+                            <p:column headerText="Preço" width="200" style="text-align: center;">
                                 <h:outputText value="#{item.preco}">
                                     <f:convertNumber minFractionDigits="2"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Excluir" width="80" style="text-align: center">
-                                <p:commandButton id="excluir" action="#{ordemServicoMB.removeServico(item)}" icon="ui-icon-trash" title="Excluir" update="itensOrdemServico" immediate="true"/>
+                            <p:column headerText="Excluir" width="80" style="text-align: center;">
+                                <p:commandButton id="excluir" action="#{ordemServicoMB.removeServico(item)}" icon="ui-icon-trash"
+                                                 update="itensOrdemServico" immediate="true"/>
                             </p:column>
                         </p:dataTable>
                     </div>
                 </div>
                 <br/>
                 <div align="center">
-                    <p:commandButton action="#{ordemServicoMB.salvar()}" value="Salvar" update="growl" style="margin-right: 10px;"/>
+                    <p:commandButton action="#{ordemServicoMB.salvar()}" value="Salvar" update="growl" style="margin-right: 10px;" immediate="true"/>
                     <p:commandButton action="#{ordemServicoMB.cancelar()}" value="Cancelar" immediate="true"/>
                 </div>
                 <br/>
@@ -90,4 +99,3 @@
         </ui:define>
     </ui:composition>
 </html>
-
