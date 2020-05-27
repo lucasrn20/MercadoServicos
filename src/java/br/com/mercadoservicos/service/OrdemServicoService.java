@@ -34,13 +34,29 @@ public class OrdemServicoService {
             itensOrdemServicoDao.inserir(item);
             cont++;
         }
-      
-        
-        
         return true;
+    }
+    
+    public boolean alterar(OrdemServico ordemServico,List<ItensOrdemServico> itensOrdemServico){
+        itensOrdemServicoDao.excluir(ordemServico);
+        int cont = 1;
+        for (ItensOrdemServico item: itensOrdemServico){
+            ItensOrdemServicoPk itemPk = new ItensOrdemServicoPk();
+            itemPk.setOrdemServico(ordemServico);
+            itemPk.setSequencia(cont);
+            item.setItensOrdemServicoPk(itemPk);
+            itensOrdemServicoDao.inserir(item);
+            cont++;
+        }
+        return this.ordemServicoDao.alterar(ordemServico);
     }
 
     public boolean excluir(OrdemServico ordemServico){
         return this.ordemServicoDao.excluir(ordemServico);
+    }
+    
+    public List<ItensOrdemServico> listarItens(OrdemServico ordemServico){
+        return itensOrdemServicoDao.listar(ordemServico);
+        
     }
 }

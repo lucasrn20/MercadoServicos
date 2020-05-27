@@ -47,7 +47,11 @@ public class OrdemServicoController implements Serializable{
     }
     
     public String buscaDados(OrdemServico ordemServico){
+        itemOrdemServico = new ItensOrdemServico();
+        clientes = usuarioService.listarClientes();
+        empresas = usuarioService.listarEmpresas();
         this.ordemServico = ordemServico;
+        this.itensOrdemServico = ordemServicoService.listarItens(ordemServico);
         return "alter.xhtml?faces-redirect=true";
     }
     
@@ -58,6 +62,16 @@ public class OrdemServicoController implements Serializable{
             return "list.xhtml?faces-redirect=true"; 
         }
         UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao salvar a ordem de serviço!");
+        return null;
+    }
+    
+    public String alterar(){
+        if(ordemServicoService.alterar(ordemServico, itensOrdemServico)){
+            UtilMensagens.mensagemSucesso("Sucesso", "Ordem de serviço alterada com sucesso!");
+            this.listar();
+            return "list.xhtml?faces-redirect=true"; 
+        }
+        UtilMensagens.mensagemErro("Erro", "Ocorreu um erro ao alterar a ordem de serviço!");
         return null;
     }
     
@@ -72,8 +86,12 @@ public class OrdemServicoController implements Serializable{
     }
     
     public void addServico(){
-        itensOrdemServico.add(itemOrdemServico);
-        itemOrdemServico = new ItensOrdemServico();
+        if(itemOrdemServico.getServico() == null || itemOrdemServico.getQuantidade() == null){
+            UtilMensagens.mensagemErro("Erro", "Informe o serviço e a quantidade");
+        }else{
+            itensOrdemServico.add(itemOrdemServico);
+            itemOrdemServico = new ItensOrdemServico();   
+        }
     }
     
     public void removeServico(ItensOrdemServico itemOrdemServico ){
